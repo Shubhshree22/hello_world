@@ -1,0 +1,30 @@
+<apex:page StandardController="Account" tabStyle="Account">
+      <apex:form >
+        <apex:pageBlock title="Account Detail" >
+            <table border="1px" cellpadding="0" cellspacing="0" width="100%" style="font-size: bold 40px ;font-family: Arial;">
+                <tr>
+                    <td style="padding:5px;">Name <br/>
+                        <apex:outputField value="{!Account.name}" styleClass="companyName"/>
+                    </td>
+                    <td style="padding:5px;">AccountNumber <br/>
+                        <apex:outputField value="{!Account.AccountNumber}" styleClass="companyName"/>
+                    </td>
+                    <td style="padding:5px;">Phone <br/>
+                        <apex:outputField value="{!Account.Phone}"  styleClass="companyName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px;">Website <br/>
+                        <apex:outputField value="{!Account.Website}" styleClass="companyName" />
+                    </td>
+                    <td style="padding:5px;">Owner Id <br/>
+                        <apex:outputField value="{!Account.OwnerId}" styleClass="companyName" />
+                    </td>
+                    <td style="padding:5px;">Site <br/>
+                       <apex:outputField value="{!Account.Site}" styleClass="companyName"/>
+                    </td>
+                </tr>
+            </table>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

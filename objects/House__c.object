@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Holds details Regarding House about Owner ,Where it is located and Everything related to a house.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Address__c</fullName>
+        <description>It will Hold Address of House.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>To hold the address of house</inlineHelpText>
+        <label>Address</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Email__c</fullName>
+        <description>Email Address</description>
+        <externalId>false</externalId>
+        <label>Email</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>House_owner__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>It will Hold same name Of Member ..It is a lookup field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Hold the owner</inlineHelpText>
+        <label>House owner</label>
+        <referenceTo>Member__c</referenceTo>
+        <relationshipLabel>Houses</relationshipLabel>
+        <relationshipName>Houses</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Inauguration_Date__c</fullName>
+        <description>This field Holds The Date When a Person is coming in house.</description>
+        <externalId>false</externalId>
+        <label>Inauguration Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>This_Year_Balance__c</fullName>
+        <description>Total  sum of Balance from all Member</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will hold the Sum of balance from all the members. Populated via trigger.</inlineHelpText>
+        <label>This Year Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>This_year_Expense__c</fullName>
+        <description>Sum Of Expenses From all the Member</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will hold the Sum of expenses from
+all the members. Populated via trigger.</inlineHelpText>
+        <label>This  year Expense</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Balance__c</fullName>
+        <externalId>false</externalId>
+        <label>Total_Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Members__c</fullName>
+        <description>This field will hold the total number of members under this. Populated via trigger</description>
+        <externalId>false</externalId>
+        <label>Total Members</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>House</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Houses</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>VR_InaugurationDate</fullName>
+        <active>true</active>
+        <errorConditionFormula>DATEVALUE(CreatedDate)&gt; Inauguration_Date__c</errorConditionFormula>
+        <errorMessage>Inaguration date cannot be earlier than created date</errorMessage>
+    </validationRules>
+</CustomObject>

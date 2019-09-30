@@ -1,0 +1,21 @@
+<apex:page controller="AccountInsert" lightningStylesheets="true"  >
+    <apex:form >
+        <apex:pageBlock title="New Account">
+            <apex:pageBlockSection >
+                <apex:inputField label="Name" value="{!acc.Name}"/> 
+                <apex:inputField label="Industry"  value="{!acc.Industry}"/> 
+                <center><apex:commandButton action="{!save}" value="Save" reRender="accountTable" /></center>
+            </apex:pageBlockSection>
+                
+                <apex:pageBlockTable id="accountTable" value="{!insertedAccount}" var="table">
+                    
+                    <apex:column value="{!table.Name}"/>
+                    
+                    <apex:column value="{!table.Industry}">
+                        
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object hold the expense details.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <description>Check Status of expense</description>
+        <externalId>false</externalId>
+        <label>Approval Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approve</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reject</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Available_Balance__c</fullName>
+        <description>This field will calculate the  Balance Available..Calculated By differnce of Total Balance and Total Expense</description>
+        <externalId>false</externalId>
+        <formula>Total_Balance__c - Total_Expense__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Available Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Formula_To_Cal__c</fullName>
+        <externalId>false</externalId>
+        <formula>Total_Balance__c * 2</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Formula To Cal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Member__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>From this we have to choose the Member Whose Expense We are holding</description>
+        <externalId>false</externalId>
+        <label>Member</label>
+        <referenceTo>Member__c</referenceTo>
+        <relationshipLabel>Expenses</relationshipLabel>
+        <relationshipName>Expenses</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Roll_Up_ExpenseItem__c</fullName>
+        <externalId>false</externalId>
+        <label>Roll Up ExpenseItem</label>
+        <summarizedField>Expense_Item__c.Cal_Expense_Item__c</summarizedField>
+        <summaryForeignKey>Expense_Item__c.Expense__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Short_Name__c</fullName>
+        <description>In thiss we have to write Jan For January and for other months too and Year of Year</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For yearly expense this field will hold the year and for monthly expense it will hold the Month Name</inlineHelpText>
+        <label>Short Name</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Balance__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Total Balance For one Member</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will holds the total balance for member</inlineHelpText>
+        <label>Total Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Expense__c</fullName>
+        <description>When we are selecting Type as Yearly it will Calculate the Expense from Child Line Item.
+When we are selecting Type as Monthly it will Calculate the Expense from Child Expense Item.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will auto populate according to child expenses or expenses line items.</inlineHelpText>
+        <label>Total Expense</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <description>It is Picklist where we have to select the yearly or Monthly</description>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yearly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Yearly_Expense__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>When Type is yearly then it is going to use</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will come in picture
+when Type is Monthly</inlineHelpText>
+        <label>Yearly Expense</label>
+        <referenceTo>Expense__c</referenceTo>
+        <relationshipLabel>Expenses</relationshipLabel>
+        <relationshipName>Expenses</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <label>Expense</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Total_Expense__c</columns>
+        <columns>Total_Balance__c</columns>
+        <columns>Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Expense Name</label>
+        <type>Text</type>
+    </nameField>
+    <namedFilters>
+        <fullName>nf_01I2v000001fX0GEAU_00N2v00000HZV3MEAX</fullName>
+        <active>true</active>
+        <field>Expense__c.Yearly_Expense__c</field>
+        <filterItems>
+            <field>Expense__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Yearly</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+        <name>Expense_Yearly Expense</name>
+    </namedFilters>
+    <namedFilters>
+        <fullName>nf_01I2v000001fX5qEAE_00N2v00000HZV9ZEAX</fullName>
+        <active>true</active>
+        <field>Expense_Item__c.Expense__c</field>
+        <filterItems>
+            <field>Expense__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Monthly</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+        <name>Expense Item_Expense</name>
+    </namedFilters>
+    <pluralLabel>Expenses</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>VR_TotalExpense</fullName>
+        <active>true</active>
+        <errorConditionFormula>Total_Expense__c &gt;Total_Balance__c</errorConditionFormula>
+        <errorDisplayField>Total_Expense__c</errorDisplayField>
+        <errorMessage>Total expense can’t grater then Total Balance</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VR_YearlyExpense</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND((ISPICKVAL( Type__c ,&quot;yearly&quot;) ), Yearly_Expense__c !=NULL)</errorConditionFormula>
+        <errorDisplayField>Yearly_Expense__c</errorDisplayField>
+        <errorMessage>Yearly Expense should not populated when Type is Yearly</errorMessage>
+    </validationRules>
+</CustomObject>

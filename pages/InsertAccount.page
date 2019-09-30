@@ -1,0 +1,41 @@
+<apex:page StandardController="Account"  lightningStylesheets="true">
+    <apex:form >
+        <apex:pageBlock title="New Account">
+            <apex:pageBlockSection >
+                <apex:inputField label="Name" value="{!Account.Name}"/> 
+                <apex:inputField label="Industry"  value="{!Account.Industry}"/> 
+                
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection >
+                <apex:inputCheckbox onkeypress="onCheckBoxTrue"  label="Shipping Address is same as Billing Address"/>
+                <apex:inputfield label="Billing Street" id="street" value="{!Account.BillingStreet}"/> 
+                <apex:inputfield label="Billing City" value="{!Account.BillingCity}"/>
+                <apex:inputfield label="Billing State" value="{!Account.BillingState}"/>
+                <apex:inputfield label="Billing Country" value="{!Account.BillingCountry}"/>
+                <apex:inputfield label="Billing Postal Code" value="{!Account.BillingPostalCode}"/>
+            </apex:pageBlockSection>                 
+            
+            <apex:pageBlockSection >
+                <apex:inputfield label="Shipping Street" id="shippingStreet"  value="{!Account.ShippingStreet}"/> 
+                <apex:inputfield label="Shipping City" value="{!Account.ShippingCity}"/>
+                <apex:inputfield label="Shipping State" value="{!Account.ShippingState}"/>
+                <apex:inputfield label="Shipping Country" value="{!Account.ShippingCountry}"/>
+                <apex:inputfield label="Shipping Postal Code" value="{!Account.ShippingPostalCode}"/>
+                
+            </apex:pageBlockSection>
+            <center><apex:commandButton action="{!Save}" value="Save" rerender="accountsList" /></center>
+            
+         
+        </apex:pageBlock>
+      
+    </apex:form>
+    <script>
+    function onCheckBoxTrue() {
+        alert('hey');
+        console.log('hello');
+        document.getElementById("shippingStreet").value = document.getElementById("street").value ;
+        console.log('Street name' +document.getElementById(shippingStreet).value);
+    }
+    </script>
+</apex:page>

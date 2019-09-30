@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object holds the members details under the house.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Anniversary__c</fullName>
+        <description>It will holds Anniversary of Person.</description>
+        <externalId>false</externalId>
+        <formula>Person__r.Anniversary__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Will grab value from Person Anniversary field</inlineHelpText>
+        <label>Anniversary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Birthday__c</fullName>
+        <description>It will holds the date of the Person Birthday</description>
+        <externalId>false</externalId>
+        <formula>Person__r.Birthday__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Will grab value from Person Birthday field</inlineHelpText>
+        <label>Birthday</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <description>In this field The date when a Member is leaving a house.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field hold the end date of house leaving. Really useful for temporary members</inlineHelpText>
+        <label>End_Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>House__c</fullName>
+        <description>From This we have to choose the House Details of member.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Not reparenting allowed</inlineHelpText>
+        <label>House</label>
+        <referenceTo>House__c</referenceTo>
+        <relationshipLabel>Members</relationshipLabel>
+        <relationshipName>Members</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Person__c</fullName>
+        <description>From this we Will Choose Person</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Allow reparenting</inlineHelpText>
+        <label>Person</label>
+        <referenceTo>Person__c</referenceTo>
+        <relationshipLabel>Members</relationshipLabel>
+        <relationshipName>Members</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <description>When a Member is started Leaving .</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field hold the start date of house leaving for member. Really useful for temporary members</inlineHelpText>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>This_Year_Balance__c</fullName>
+        <description>Total Balance from all  the Expense</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will hold the Sum of balance from all the Expenses.
+Populated via trigger</inlineHelpText>
+        <label>This Year Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>This_Year_Expense__c</fullName>
+        <description>This will holds Total of all Expenses</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will hold the Sum of expenses from all the Expenses.
+Populated via trigger</inlineHelpText>
+        <label>This Year Expense</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <label>Member</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Member Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Members</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Permanent</fullName>
+        <active>true</active>
+        <label>Permanent</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Temporary</fullName>
+        <active>true</active>
+        <label>Temporary</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>VR_DateValidation</fullName>
+        <active>true</active>
+        <description>End date can’t be earlier then start date</description>
+        <errorConditionFormula>Start_Date__c &gt;End_Date__c</errorConditionFormula>
+        <errorMessage>End date should be greater then start date.</errorMessage>
+    </validationRules>
+</CustomObject>
