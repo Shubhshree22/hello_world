@@ -1,0 +1,122 @@
+/**
+* Purpose      :  This batch class is used to send email to contact owner of monthly transaction.
+*
+* Created By   :  Shubh Shree Rathore
+* 
+* Created Date :  05/08/2019
+* 
+* Revision Logs:  V1.0 -  Shubh Shree Rathore -  05/08/2019- Created
+* 
+**/
+global class Batch_MonthlyEmailToContactOwner implements Database.Batchable <sObject> ,Database.Stateful { 
+    
+    /**
+* @description    :   This method is used to query the data.
+*     
+* @args           :   Database.BatchableContext
+*   
+* @return         :   Database.QueryLocator
+*      
+* @revision Logs  :   V1.0 - Shubh Shree Rathore  - 05/08/2019- Created
+*     
+**/
+    
+    //start part
+    global Database.QueryLocator start(Database.BatchableContext BC){
+	
+        // SOQL Query to fetch the data.
+		
+        return Database.getQueryLocator('Select Id,Name,Amount__c,Type__c,Contact__r.Email,Contact__r.Available_Balance__c,Contact__r.Account_Number__c From Transaction_Entry__c WHERE Contact__c!=null AND Amount__c > 0 AND Status__c = \'Completed\' AND CreatedDate = This_Month AND Contact__r.Status__c = \'Active\'');  
+    }
+    /**
+* @description    :   This method is used to execute the data.
+*     
+* @args           :   Database.BatchableContext ,List
+*   
+* @return         :   void
+*      
+* @revision Logs  :   V1.0 - Shubh Shree Rathore  - 05/08/2019- Created
+*     
+**/    
+    
+    // Execute Part
+    global void execute(Database.BatchableContext BC, List<Transaction_Entry__c> transEntry){
+        
+        // Created a Map to Hold Transaction
+        Map<String,List<Transaction_Entry__c>> monthlyEmailMap = new Map<String,List<Transaction_Entry__c>>();
+        
+        // Iterate transEntry list
+        for(Transaction_Entry__c trans: transEntry){
+            
+			//checking map contains email or not 
+            if(!monthlyEmailMap.containsKey(trans.Contact__r.Email)){
+                monthlyEmailMap.put(trans.Contact__r.Email,new List<Transaction_Entry__c>());
+            }
+            monthlyEmailMap.get(trans.Contact__r.Email).add(trans);   
+        } 
+        
+        //Variables to store date 
+        Date firstDayOfTheMonth = System.today().toStartOfMonth();
+        Date lastDayOfTheMonth = firstDayOfTheMonth.addMonths(1).addDays(-1);
+        
+        //Email list.
+        List<Messaging.SingleEmailMessage> monthlyMail =  new List<Messaging.SingleEmailMessage>();
+        
+        //Last Date of Month of equals today
+        if(lastDayOfTheMonth == System.today()){
+            
+            // Iterate Monthly Map
+            for(String emailId : monthlyEmailMap.keyset()){
+                
+                //email is not blank
+                if(String.isNotBlank(emailId)){
+                    
+                    //Instance of single email message
+                    Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+                    
+                    //Contact owner list to whom we will send mail
+                    List<String> sendTo = new List<String>();
+                    
+                    // email is send to and from
+                    sendTo.add(emailId);
+                    mail.setToAddresses(sendTo);
+                    mail.setReplyTo('shubhirathore22@gmail.com');
+                    mail.setSenderDisplayName('Axis Bank');
+                    
+                    // Set email contents
+                    mail.setSubject('Transaction of Month');
+                    String body = '<table border="1"> <tr> <th>Name</th> <th> Type</th> <th> Date</th> <th> Amount</th> <th>Status</th></tr>';
+                    
+                    
+                    // Iterate map data according to the email id.
+                    for(Transaction_Entry__c tranEntry : monthlyEmailMap.get(emailId)){
+                        
+                        //htmlbody 
+                        body += '<tr> <td>'+ tranEntry.Name +'</td> <td>'+ tranEntry.Type__c +'</td> <td>'+ tranEntry.CreatedDate +'</td> <td>'+ tranEntry.Amount__c +'</td><td>'+ tranEntry.Status__c +'</td></tr>';
+                    }
+                    body += '</table>';
+                    mail.setHtmlBody(body);
+                    
+                    // Adding email to the list
+                    monthlyMail.add(mail);
+                }
+            }
+        }
+        // Send all emails
+        Messaging.sendEmail(monthlyMail);
+    }
+/**
+* @description    :   This is finish method.
+*     
+* @args           :   Database.BatchableContext 
+*   
+* @return         :   void
+*      
+* @revision Logs  :   V1.0 - Shubh Shree Rathore  - 05/08/2019- Created
+*     
+**/     
+    // Finish Method    
+    global void finish(Database.BatchableContext bc){   
+    }
+    
+}
